@@ -10,8 +10,14 @@ test_that("shapefile tracking includes required and optional components", {
 
   tracked <- track_shapefile_files(file.path(directory, "grid.shp"))
 
-  expect_setequal(tracked, paths)
-  expect_identical(main_shapefile_path(tracked), file.path(directory, "grid.shp"))
+  # Windows temp paths can contain backslashes even though list.files returns
+  # forward slashes. Compare resolved files rather than separator spelling.
+  expect_setequal(normalizePath(tracked, winslash = "/"),
+                  normalizePath(paths, winslash = "/"))
+  expect_identical(
+    normalizePath(main_shapefile_path(tracked), winslash = "/"),
+    normalizePath(file.path(directory, "grid.shp"), winslash = "/")
+  )
 })
 
 test_that("shapefile tracking rejects incomplete component sets", {

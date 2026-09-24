@@ -1,0 +1,224 @@
+{
+  "schema_version": "1.0",
+  "id": "avonet_trait_set",
+  "dataset_name": "AVONET-derived bird trait table used by the fourth-corner GLLVM",
+  "data_file": "inputs/data_raw/species/trait_set.csv",
+  "format": "CSV",
+  "source": {
+    "provider": "AVONET",
+    "release_or_version": null,
+    "citation": null,
+    "licence": "CC BY 4.0 as supplied by the author; retain the source attribution and licence statement with redistributed copies.",
+    "redistribution_status": "confirm the exact AVONET release and document any author-side filtering or transformation"
+  },
+  "schema": {
+    "record_unit": "One taxon or species row as represented in the supplied trait table",
+    "model_fields": {
+      "species1": "Species name used to match trait rows to the species response matrix.",
+      "mass": "Body mass in grams; natural-log transformed, then centred and scaled for the fourth-corner model.",
+      "hand_wing_index": "Dimensionless hand-wing index; centred and scaled for the fourth-corner model."
+    },
+    "fields": [
+      {
+        "name": "sequence",
+        "definition": "Row or sequence identifier from the source trait table.",
+        "unit": "not applicable"
+      },
+      {
+        "name": "species1",
+        "definition": "Scientific name used as the trait-table matching key.",
+        "unit": "not applicable"
+      },
+      {
+        "name": "family1",
+        "definition": "Family associated with species1.",
+        "unit": "not applicable"
+      },
+      {
+        "name": "order1",
+        "definition": "Taxonomic order associated with species1.",
+        "unit": "not applicable"
+      },
+      {
+        "name": "avibase_id1",
+        "definition": "Avibase identifier associated with species1.",
+        "unit": "identifier"
+      },
+      {
+        "name": "total_individuals",
+        "definition": "Number of individuals represented in the source measurements.",
+        "unit": "individuals"
+      },
+      {
+        "name": "female",
+        "definition": "Number of measured individuals recorded as female.",
+        "unit": "individuals"
+      },
+      {
+        "name": "male",
+        "definition": "Number of measured individuals recorded as male.",
+        "unit": "individuals"
+      },
+      {
+        "name": "unknown",
+        "definition": "Number of measured individuals with unknown or unreported sex.",
+        "unit": "individuals"
+      },
+      {
+        "name": "complete_measures",
+        "definition": "Source indicator or count describing completeness of the measured trait record; preserve source coding.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "beak_length_culmen",
+        "definition": "Bill length measured along the culmen.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "beak_length_nares",
+        "definition": "Bill length measured from the nares.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "beak_width",
+        "definition": "Bill width.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "beak_depth",
+        "definition": "Bill depth.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "tarsus_length",
+        "definition": "Tarsus length.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "wing_length",
+        "definition": "Wing length.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "kipps_distance",
+        "definition": "Kipp's distance, a measure of wing shape.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "secondary1",
+        "definition": "Source field for the secondary feather measurement or descriptor.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "hand_wing_index",
+        "definition": "Hand-wing index, a dimensionless measure derived from wing and Kipp's distance.",
+        "unit": "dimensionless"
+      },
+      {
+        "name": "tail_length",
+        "definition": "Tail length.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "mass",
+        "definition": "Body mass used as a fourth-corner predictor.",
+        "unit": "g"
+      },
+      {
+        "name": "mass_source",
+        "definition": "Source or method recorded for the mass value.",
+        "unit": "text/source-defined"
+      },
+      {
+        "name": "mass_refs_other",
+        "definition": "Additional references associated with mass values.",
+        "unit": "text/source-defined"
+      },
+      {
+        "name": "inference",
+        "definition": "Source field describing inference or imputation status; retain the source's coding.",
+        "unit": "text/source-defined"
+      },
+      {
+        "name": "traits_inferred",
+        "definition": "Source flag or description indicating inferred trait values.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "reference_species",
+        "definition": "Reference taxon used when a value was inferred, where applicable.",
+        "unit": "taxon name"
+      },
+      {
+        "name": "habitat",
+        "definition": "Source habitat category or descriptor.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "habitat_density",
+        "definition": "Source habitat-density category or descriptor.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "migration",
+        "definition": "Source migration category or descriptor.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "trophic_level",
+        "definition": "Source trophic-level category or value.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "trophic_niche",
+        "definition": "Source trophic-niche category or descriptor.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "primary_lifestyle",
+        "definition": "Source primary-lifestyle category or descriptor.",
+        "unit": "source-defined"
+      },
+      {
+        "name": "min_latitude",
+        "definition": "Minimum latitude of the source species range.",
+        "unit": "decimal degrees"
+      },
+      {
+        "name": "max_latitude",
+        "definition": "Maximum latitude of the source species range.",
+        "unit": "decimal degrees"
+      },
+      {
+        "name": "centroid_latitude",
+        "definition": "Latitude of the source species-range centroid.",
+        "unit": "decimal degrees"
+      },
+      {
+        "name": "centroid_longitude",
+        "definition": "Longitude of the source species-range centroid.",
+        "unit": "decimal degrees"
+      },
+      {
+        "name": "range_size",
+        "definition": "Source estimate of geographic range size.",
+        "unit": "source-defined; confirm exact unit from the cited AVONET release"
+      },
+      {
+        "name": "species",
+        "definition": "Additional scientific-name field retained from the supplied table; not the model matching key.",
+        "unit": "taxon name"
+      }
+    ],
+    "transformations": [
+      "The model matches taxa on species1.",
+      "The model uses mass and hand_wing_index; all other columns are retained source metadata unless otherwise noted.",
+      "The fitted model uses log(mass), then centres and scales it; hand_wing_index is centred and scaled."
+    ]
+  },
+  "author_confirmation_needed": [
+    "Add the exact AVONET release citation and identifier.",
+    "Confirm units and source coding for fields marked source-defined.",
+    "Describe how this supplied subset was filtered or modified from the cited release."
+  ]
+}

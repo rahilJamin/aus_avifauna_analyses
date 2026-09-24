@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: >-
+  If you use this workflow, code, or demonstration dataset, please cite this
+  software repository. A version-specific DOI will be added after archival.
+title: "Reproducible Analysis of Australian Bird Communities"
+type: software
+authors:
+  - family-names: "Amin"
+    given-names: "Rahil Jasminkumar"
+    orcid: "https://orcid.org/0000-0002-6936-5732"
+version: 0.1.0
+repository-code: "https://github.com/rahilJamin/aus_avifauna_analyses"
+license: MIT
+abstract: >-
+  A targets-based R workflow for occurrence cleaning, landscape-metric
+  extraction, beta-diversity modelling, regional-convergence analysis, joint
+  species-distribution modelling, sensitivity analysis, and a reduced
+  demonstration analysis of Australian bird communities.
+keywords:
+  - biodiversity
+  - beta diversity
+  - community ecology
+  - landscape ecology
+  - joint species distribution model
+  - reproducible research
+  - R
+  - targets

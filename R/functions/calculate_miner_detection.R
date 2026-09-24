@@ -4,9 +4,9 @@ import::from(tidyr, replace_na)
 
 #' Calculate Noisy Miner detection by hexagon
 #'
-#' Uses the same incidence-unit definition as the Chao2/iNEXT stage. The output
-#' retains the historical checklist column names, where a checklist means one
-#' unique site (`hex_id`) by incidence-unit combination.
+#' Uses the same incidence-unit definition as the Chao2/iNEXT stage. In the
+#' output, a checklist is one unique site (`hex_id`) by incidence-unit
+#' combination.
 #'
 #' @param hex_occ Hex-level occurrence table. Each `hex_id` is a 2.5 km grid cell
 #'   treated as one ecological site.
@@ -43,8 +43,7 @@ calculate_miner_detection <- function(hex_occ,
   hex_occ$hex_id <- as.character(hex_occ$hex_id)
   dat <- add_incidence_unit(hex_occ, incidence_unit)
 
-  # Use the same sampling-unit definition as the Chao2/iNEXT step. The output
-  # keeps the historical "checklist" names for downstream compatibility.
+  # Use the same sampling-unit definition as the Chao2/iNEXT step.
   checklists <- dat %>%
     distinct(hex_id, incidence_unit)
 

@@ -1,0 +1,48 @@
+{
+  "status": "author_generated_demo_subset",
+  "source_workflow": "main _targets pipeline cache",
+  "selection": [
+    {
+      "region": "New South Wales and Victoria",
+      "longitude_min": 145,
+      "longitude_max": 149,
+      "latitude_min": -38,
+      "latitude_max": -34.5,
+      "n_sites": 150,
+      "n_ibra_subregions": 11,
+      "n_species": 50,
+      "species_rule": "Noisy Miner plus the most frequent trait-matched species"
+    }
+  ],
+  "selection_settings": {
+    "store": "_targets_demo",
+    "data_dir": "demo/data",
+    "input_dir": "demo/data/inputs",
+    "output_dir": "demo/outputs",
+    "extent_lonlat": [145, 149, -38, -34.5],
+    "n_sites": 150,
+    "n_species": 50,
+    "raster_buffer_m": 5000,
+    "occurrence_chunk_size": 250000,
+    "occupancy_threshold": 0.02
+  },
+  "occurrence_rows": {
+    "input_file": "ala_df_raw.csv",
+    "rows_retained_for_selected_cells": 212353,
+    "reused_existing_checkpoint": true,
+    "checkpoint_bytes": 1646689
+  },
+  "rasters": {
+    "clum": {
+      "source": "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif",
+      "demo_cells": 39179954,
+      "note": "Source-code raster values and category table retained."
+    },
+    "nvis": {
+      "source": "inputs/data_raw/raw_rasters/nvis_mvg.tif",
+      "demo_cells": 9796677,
+      "note": "Source-code raster values and category table retained."
+    }
+  },
+  "provenance_notes": ["All selected site records are extracted from the frozen ALA snapshot.", "Only spatially unambiguous rows assigned to selected main-grid hexagons are retained.", "The demo study area is the union of the selected main-grid hexagons.", "The demo reruns cleaning, iNEXT/Chao2 filtering, raster reclassification and metric extraction.", "Demo model outputs are illustrative and must not be interpreted as publication estimates."]
+}

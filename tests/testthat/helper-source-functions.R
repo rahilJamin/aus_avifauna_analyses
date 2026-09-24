@@ -19,6 +19,14 @@ source_function <- function(file, envir = parent.frame()) {
   source(file.path(find_repo_root(), "R", "functions", file), local = envir)
 }
 
+source_sensitivity_function <- function(file, envir = parent.frame()) {
+  source(file.path(find_repo_root(), "R", "sensitivity", file), local = envir)
+}
+
 source_config <- function(envir = parent.frame()) {
   source(file.path(find_repo_root(), "R", "00_main_config.R"), local = envir)
+}
+
+source_sensitivity_config <- function(envir = parent.frame()) {
+  source(file.path(find_repo_root(), "R", "01_sensitivity_config.R"), local = envir)
 }

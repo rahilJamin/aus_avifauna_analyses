@@ -1,7 +1,7 @@
 # =============================================================================
 # pipeline_data_processing.R
-# Targets for external inputs, occurrence cleaning, hex assignment, iNEXT/Chao2
-# filtering, and aligned model-data preparation.
+# Targets for external inputs, grid creation, occurrence cleaning, hex
+# assignment, iNEXT/Chao2 filtering, and aligned model-data preparation.
 # =============================================================================
 
 # Stage settings ----
@@ -10,13 +10,13 @@
 # make occurrence cleaning outdated.
 data_input_paths <- cfg[c(
   "raw_ala_path",
-  "hex_2_5_path",
-  "selected_metrics_2_5_path",
+  "study_area_path",
   "trait_path",
   "ibra_path"
 )]
 
 data_output_paths <- cfg[c(
+  "hex_2_5_path",
   "table_dir",
   "cleaned_records_path",
   "hex_occ_path",
@@ -37,6 +37,7 @@ cleaning_settings <- cfg[c(
 )]
 
 hex_settings <- cfg[c("input_lonlat_crs")]
+grid_settings <- cfg$hex_grid
 
 matrix_settings <- cfg[c(
   "analysis_id",
@@ -66,13 +67,8 @@ data_processing_targets <- list(
     format = "file"
   ),
   tar_target(
-    hex_grid_files,
-    track_shapefile_files(data_input_paths$hex_2_5_path),
-    format = "file"
-  ),
-  tar_target(
-    landscape_metrics_file,
-    data_input_paths$selected_metrics_2_5_path,
+    study_area_files,
+    track_shapefile_files(data_input_paths$study_area_path),
     format = "file"
   ),
   tar_target(
@@ -84,6 +80,32 @@ data_processing_targets <- list(
     ibra_files,
     track_shapefile_files(data_input_paths$ibra_path),
     format = "file"
+  ),
+
+
+  # 00 Create the shared analysis grid ----
+
+  tar_target(
+    hex_grid,
+    create_hex_grid(
+      study_area = sf::st_read(main_shapefile_path(study_area_files), quiet = TRUE),
+      cellsize_m = grid_settings$cellsize_m,
+      grid_crs = grid_settings$crs,
+      flat_topped = grid_settings$flat_topped
+    ),
+    packages = "sf"
+  ),
+  tar_target(
+    hex_grid_files,
+    {
+      path <- data_output_paths$hex_2_5_path
+      assert_not_raw_output_path(path)
+      dir.create(dirname(path), recursive = TRUE, showWarnings = FALSE)
+      sf::st_write(hex_grid, path, append = FALSE, quiet = TRUE)
+      track_shapefile_files(path)
+    },
+    format = "file",
+    packages = "sf"
   ),
 
 
@@ -201,10 +223,14 @@ data_processing_targets <- list(
       )
     ),
     format = "file"
-  ),
+  )
+)
 
 
-  # 03b Prepare aligned model data ----
+# Prepare aligned model data ----
+# This list is declared separately so _targets.R can place the generated
+# landscape metrics between Chao2 site selection and model-data preparation.
+model_data_targets <- list(
 
   tar_target(
     landscape_data,

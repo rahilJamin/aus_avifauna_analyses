@@ -51,21 +51,18 @@ cfg <- local({
     # These files are treated as fixed inputs. They should exist before running
     # the main workflow and should not be overwritten by analysis scripts.
     raw_ala_path = file.path(raw_data_dir, "species", "ala_df_raw.csv"),
-    hex_2_5_path = file.path(raw_data_dir, "spatial_grids", "hex_2_5.shp"),
-    selected_metrics_2_5_path = file.path(
-      raw_data_dir,
-      "lsm_processed",
-      "selected_metrics_2_5km.rds"
-    ),
+    study_area_path = file.path(raw_data_dir, "spatial_grids", "study_area.shp"),
     trait_path = file.path(raw_data_dir, "species", "trait_set.csv"),
     ibra_path = file.path(
       raw_data_dir,
       "spatial_grids",
       "IBRA7_subregions",
-      "IBRA7_subregions.shp"
+      "ibra7_subregions.shp"
     ),
 
     # Derived data from preprocessing stages ----
+    # Created from study_area_path; every spatial stage uses this generated grid.
+    hex_2_5_path = file.path(data_dir, "spatial_grids", "hex_2_5.shp"),
     # 01_clean_records.R writes `cleaned_records_path`.
     cleaned_records_path = file.path(
       data_dir,
@@ -137,10 +134,100 @@ cfg <- local({
       "dbmem_forward_selection_2020_inext.rds"
     ),
 
+    # Hexagon grid ----
+    # WORKFLOW CHANGE: construct the grid in Australian Albers, using metres.
+    # The former supplied grid used an approximate kilometres-to-degrees size.
+    # The generated cells therefore have new geometries and site identifiers.
+    hex_grid = list(
+      crs = 3577,
+      # Opposite-edge spacing, not radius or area. A full cell has area
+      # sqrt(3) / 2 * cellsize_m^2 (about 5.413 square kilometres at 2500 m).
+      cellsize_m = 2500,
+      flat_topped = FALSE
+    ),
+
+    # Landscape metrics ----
+    # WORKFLOW CHANGE: sample the hexagons retained by this same 2020-onward
+    # iNEXT/Chao2 workflow. No externally supplied valid-site list is needed.
+    # Raster classification remains independent of occurrence processing;
+    # extraction depends on the generated grid and retained Chao2 identifiers.
+    landscape = list(
+      paths = list(
+        landuse = file.path(raw_data_dir, "raw_rasters", "clum_50m_2023_v2.tif"),
+        vegetation = file.path(raw_data_dir, "raw_rasters", "nvis_mvg.tif"),
+        vegetation_classes = file.path(data_dir, "rasters", "veg_reclass.tif"),
+        vegetation_binary = file.path(data_dir, "rasters", "veg_reclass_binary.tif"),
+        landuse_classes = file.path(data_dir, "rasters", "landuse_reclass.tif"),
+        selected_metrics = file.path(
+          data_dir, "lsm_processed", "selected_metrics_2_5km.rds"
+        )
+      ),
+      classification = list(
+        # Common projected CRS for all derived categorical rasters. Each source
+        # raster keeps the output grid chosen by terra::project(); no additional
+        # common resolution or alignment template is imposed.
+        crs = "+proj=utm +zone=55 +datum=WGS84 +units=m +no_defs",
+        resampling = "near",
+        # CLUM SIMPN groups -> intact, native production, plantation,
+        # agriculture, urban. Water (19) and other unmapped categories are NA.
+        landuse_groups = c(
+          "1" = 1L, "2" = 1L, "3" = 1L, "4" = 2L, "5" = 2L,
+          "6" = 3L, "7" = 4L, "8" = 4L, "9" = 4L, "10" = 4L,
+          "11" = 4L, "12" = 4L, "13" = 4L, "14" = 5L, "15" = 4L,
+          "16" = 5L, "17" = 5L, "18" = 5L, "19" = NA_integer_
+        ),
+        # NVIS Value codes -> wet/dense forest, sclerophyll woodland,
+        # mallee/arid woodland, open/cleared. Water and sea (24, 28) are NA.
+        vegetation_groups = c(
+          "1" = 1L, "2" = 1L, "15" = 1L,
+          "3" = 2L, "4" = 2L, "5" = 2L, "7" = 2L, "8" = 2L,
+          "9" = 2L, "10" = 2L, "11" = 2L, "12" = 2L, "29" = 2L,
+          "6" = 3L, "13" = 3L, "14" = 3L, "31" = 3L, "32" = 3L,
+          "16" = 4L, "17" = 4L, "18" = 4L, "19" = 4L, "20" = 4L,
+          "21" = 4L, "22" = 4L, "23" = 4L, "25" = 4L, "26" = 4L,
+          "27" = 4L, "99" = 4L, "24" = NA_integer_, "28" = NA_integer_
+        ),
+        # Fallbacks apply to numeric values absent from the category table. A
+        # listed category with no group mapping remains NA. The reconstruction
+        # explicitly restores the source vegetation NA mask after classification
+        # because current terra versions otherwise assign those cells class 5.
+        landuse_other = NA_integer_,
+        vegetation_other = 5L,
+        # Woodland classes 1--3 become 1; nonhabitat classes 4--5 become 2.
+        vegetation_binary = c("1" = 1L, "2" = 1L, "3" = 1L, "4" = 2L, "5" = 2L)
+      ),
+      extraction = list(
+        # Circular sampling windows centred on projected hexagon centroids.
+        # `size` in sample_lsm() is the circle radius, in projected metres.
+        buffer_m = 2500,
+        vegetation_metrics = c("lsm_c_pland", "lsm_c_area_mn"),
+        woodland_metrics = c("lsm_c_ed", "lsm_c_cohesion", "lsm_c_area_mn"),
+        landuse_metrics = "lsm_c_pland",
+        vegetation_labels = c(
+          "1" = "wet_dense", "2" = "sclerophyll", "3" = "mallee_arid",
+          "4" = "nonhabitat", "5" = "nonhabitat_other"
+        ),
+        landuse_labels = c(
+          "1" = "intact", "2" = "native_prod", "3" = "plantation",
+          "4" = "agriculture", "5" = "urban"
+        ),
+        vegetation_drop_classes = c(4L, 5L),
+        woodland_class = 1L,
+        # Apply one ten-column selection and complete-case filter, including
+        # predictors not subsequently used in the final model formulae.
+        selected_metrics = c(
+          "pland_wet_dense", "pland_sclerophyll", "pland_mallee_arid",
+          "PLAND_habitat", "area_mn_woodland", "cohesion_woodland",
+          "pland_native_prod", "pland_plantation", "pland_agriculture", "pland_urban"
+        )
+      )
+    ),
+
     # Coordinate reference systems ----
-    # Used in stages 02, 03b, 04a, and spatial diagnostics. Keep CRS choices here
-    # so all spatial joins, coordinates, and distance-based pool allocations are
-    # consistent across scripts.
+    # The grid stays in hex_grid$crs. Occurrence coordinates are transformed
+    # from input_lonlat_crs to that grid before joining. Landscape sampling and
+    # model preparation explicitly transform the same grid to their own metric
+    # CRSs; a CRS is never assigned to coordinates to simulate a transformation.
     input_lonlat_crs = 4326,      # WGS84 lon/lat for raw occurrence coordinates.
     model_coord_crs = 32655,      # Projected CRS used for model x/y coordinates.
 

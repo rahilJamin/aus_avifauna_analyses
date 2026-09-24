@@ -1,22 +1,27 @@
 /.Rproj.user/
-/.Rhistory
+.Rhistory
 /.RData
 /.Ruserdata
 /.Renviron
+/AGENTS.md
 
 # External inputs, reproducible intermediate files, and generated exports.
 /inputs/
 /outputs/
 /_targets/
+/_targets_sensitivity/
+/_targets_demo/
+
+# The completed demo inputs are tracked; generated demo files remain local.
+/demo/data/.build/
+/demo/outputs/
+
+# Author working manuscript; add it to the repository when it is ready to share.
+/manuscript/
 
 # Local package installations and document-rendering caches.
 /renv/library/
 /renv/staging/
 /renv/python/
 /.quarto/
-/reports/.quarto/
-/reports/_freeze/
-/reports/*.html
-/reports/*_files/
 /docs/logs/
-AGENTS.md

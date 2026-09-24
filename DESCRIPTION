@@ -1,0 +1,54 @@
+Type: Project
+Package: ausavifaunaanalyses
+Title: Reproducible Analysis of Australian Bird Communities
+Version: 0.1.0
+Authors@R:
+    person(given = c("Rahil", "Jasminkumar"),
+           family = "Amin",
+           role = "aut",
+           comment = c(ORCID = "0000-0002-6936-5732"))
+Description: Reproducible data processing, landscape analysis, beta-diversity
+    modelling, regional-convergence analysis, and joint species-distribution
+    modelling for Australian bird communities. The repository provides main,
+    sensitivity, and reduced demonstration workflows managed with the targets
+    package.
+License: MIT + file LICENSE
+URL: https://github.com/rahilJamin/aus_avifauna_analyses
+BugReports: https://github.com/rahilJamin/aus_avifauna_analyses/issues
+Depends:
+    R (>= 4.6.0)
+Imports:
+    adespatial,
+    callr,
+    CoordinateCleaner,
+    cowplot,
+    dplyr,
+    forcats,
+    ggh4x,
+    ggplot2,
+    gllvm,
+    iNEXT,
+    import,
+    landscapemetrics,
+    magrittr,
+    mgcv,
+    patchwork,
+    rcartocolor,
+    readr,
+    scales,
+    sf,
+    spdep,
+    stringr,
+    targets,
+    terra,
+    tibble,
+    tidyr,
+    tidyselect,
+    TMB,
+    vegan
+Suggests:
+    galah,
+    renv,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Encoding: UTF-8

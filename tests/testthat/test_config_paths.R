@@ -15,7 +15,7 @@ test_that("configured paths are portable and generated files stay outside raw in
 
   generated_names <- c(
     "data_dir", "output_dir", "table_dir", "figure_dir", "model_dir",
-    "log_dir", "diagnostic_dir", "cleaned_records_path", "hex_occ_path",
+    "log_dir", "diagnostic_dir", "hex_2_5_path", "cleaned_records_path", "hex_occ_path",
     "chao_table_path", "species_matrix_path", "hex_metadata_path",
     "candidate_model_df_path", "model_df_path", "beta_matrices_path",
     "lcbd_results_path", "regional_results_path", "gllvm_metadata_path",
@@ -28,6 +28,8 @@ test_that("configured paths are portable and generated files stay outside raw in
     logical(1),
     parent = cfg$raw_data_dir
   )))
+  expect_true(path_is_inside(cfg$study_area_path, cfg$raw_data_dir))
+  expect_true(path_is_inside(cfg$hex_2_5_path, cfg$data_dir))
 })
 
 test_that("configured scientific cutoffs are internally consistent", {
@@ -38,6 +40,9 @@ test_that("configured scientific cutoffs are internally consistent", {
   expect_lt(cfg$start_date, cfg$end_date)
 
   expect_gt(cfg$coord_precision_m, 0)
+  expect_gt(cfg$hex_grid$cellsize_m, 0)
+  expect_equal(cfg$hex_grid$crs, 3577)
+  expect_false(cfg$hex_grid$flat_topped)
   expect_gte(cfg$min_sampling_units, 1)
   expect_true(cfg$min_completeness > 0 && cfg$min_completeness <= 1)
   expect_gte(cfg$min_species, 1)

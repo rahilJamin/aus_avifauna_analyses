@@ -1,0 +1,45 @@
+{
+  "schema_version": "1.0",
+  "id": "study_area",
+  "dataset_name": "Study-area polygon supplied to the analysis",
+  "data_file": "inputs/data_raw/spatial_grids/study_area.shp",
+  "companion_files": [
+    ".shp",
+    ".shx",
+    ".dbf",
+    ".prj"
+  ],
+  "format": "ESRI Shapefile",
+  "source": {
+    "provider": null,
+    "creation_method": null,
+    "citation": null,
+    "licence": null,
+    "redistribution_status": "author metadata required"
+  },
+  "schema": {
+    "geometry_type": "polygon",
+    "coordinate_reference_system": "Read from the supplied .prj file; document the authoritative CRS after checking the source.",
+    "dbf_fields": [
+      {
+        "name": "OBJECTID",
+        "type": "numeric",
+        "definition": "Feature identifier in the supplied boundary file."
+      },
+      {
+        "name": "Shape_Leng",
+        "type": "numeric",
+        "definition": "Stored geometry-length attribute from the source file; not used by the workflow."
+      },
+      {
+        "name": "Shape_Area",
+        "type": "numeric",
+        "definition": "Stored geometry-area attribute from the source file; not used by the workflow."
+      }
+    ],
+    "workflow_use": "Boundary for creating the hexagon grid and for cropping/masking the raw land-use and vegetation rasters."
+  },
+  "author_confirmation_needed": [
+    "Identify the boundary source or creation method, source date, CRS/datum and reuse terms."
+  ]
+}

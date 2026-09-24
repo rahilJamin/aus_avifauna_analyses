@@ -1,6 +1,6 @@
 # =============================================================================
 # pipeline_outputs.R
-# Targets for publication tables, figures, diagnostics, and the Quarto report.
+# Targets for publication tables, figures, and diagnostics.
 # Each stage reads its completed model checkpoint and returns tracked files.
 # =============================================================================
 
@@ -38,10 +38,5 @@ output_targets <- list(
       regional_publication_files,
       gllvm_publication_files
     )
-  ),
-  tarchetypes::tar_quarto(
-    analysis_report,
-    path = file.path("reports", "analysis_outputs.qmd"),
-    quiet = FALSE
   )
 )

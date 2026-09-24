@@ -1,0 +1,590 @@
+{
+  "schema_version": "1.0",
+  "status": "draft_author_metadata_required",
+  "project": {
+    "id": "geb-australian-bird-community-analysis",
+    "analysis_id": "main_2020_onward_inext",
+    "repository_url": null,
+    "git_release": null,
+    "description": "Frozen inputs and reproducible derived data for the 2020-onward GEB Australian bird-community analysis."
+  },
+  "release": {
+    "repository": "Zenodo",
+    "doi": null,
+    "version": null,
+    "published_at": null,
+    "required_before_release": [
+      "Complete source versions, access dates, citations, and licences.",
+      "Confirm that redistribution is permitted for every archived external input.",
+      "Calculate SHA-256 checksums for the final archived files and sidecars.",
+      "Record the matching Git release and commit.",
+      "Replace this manifest status with complete."
+    ]
+  },
+  "scope": {
+    "taxon_group": "birds",
+    "geographic_extent": "Australia within the supplied study-area boundary",
+    "start_date_inclusive": "2020-01-01",
+    "end_date_inclusive": "2026-02-28",
+    "site_definition": "Point-topped hexagons with 2500 m opposite-edge spacing",
+    "landscape_window": "Circular 2500 m-radius window centred on each retained hexagon",
+    "main_incidence_unit": "month_year"
+  },
+  "coordinate_reference_systems": {
+    "occurrence_input": {
+      "epsg": 4326,
+      "name": "WGS 84"
+    },
+    "generated_hex_grid": {
+      "epsg": 3577,
+      "name": "GDA94 / Australian Albers"
+    },
+    "model_coordinates": {
+      "epsg": 32655,
+      "name": "WGS 84 / UTM zone 55S"
+    },
+    "landscape_processing": {
+      "proj_string": "+proj=utm +zone=55 +datum=WGS84 +units=m +no_defs",
+      "categorical_resampling": "nearest neighbour"
+    }
+  },
+  "privacy": {
+    "sensitive_personal_data_expected": false,
+    "occurrence_coordinates_retained": true,
+    "occurrence_dates_retained": true,
+    "raw_inputs_tracked_in_git": false,
+    "derived_data_tracked_in_git": false,
+    "model_outputs_tracked_in_git": false
+  },
+  "external_inputs": [
+    {
+      "id": "ala_occurrence_snapshot",
+      "metadata_file": "metadata/inputs/ala_occurrences.json",
+      "path": "inputs/data_raw/species/ala_df_raw.csv",
+      "format": "CSV",
+      "required": true,
+      "frozen_for_reproduction": true,
+      "generated_by_pipeline": false,
+      "bytes": 12375666725,
+      "sha256": null,
+      "source": {
+        "provider": "Atlas of Living Australia",
+        "dataset_version": null,
+        "query_or_download_id": null,
+        "persistent_identifier": null,
+        "accessed_at": null,
+        "citation": null,
+        "licence": "Depends on the contributing dataset; ALA's general preference for CC BY/CC0 does not establish the licence of every record in this frozen export.",
+        "redistribution_permitted": null
+      },
+      "role": "Raw bird occurrences used for cleaning, spatial assignment, incidence-frequency richness, and species presence-absence data.",
+      "authoritative_reproduction_note": "Use this frozen snapshot to reproduce the publication. A new ALA query may return changed records.",
+      "acquisition_reference": {
+        "path": "scripts/data_acquisition/ala_query_reference.R",
+        "exact_reconstruction_supported": false,
+        "reason": "The retained helper does not establish the exact taxon list, query boundary, acquisition date, or manual edits and does not request every field present in the frozen CSV."
+      },
+      "schema": {
+        "primary_taxon_field": "species",
+        "coordinate_fields": [
+          "longitude",
+          "latitude"
+        ],
+        "required_by_pipeline": [
+          "occurrenceStatus",
+          "date",
+          "species",
+          "longitude",
+          "latitude",
+          "basisOfRecord",
+          "samplingProtocol",
+          "dataResourceName",
+          "coordinateUncertaintyInMeters"
+        ],
+        "all_fields": [
+          "family",
+          "genus",
+          "species",
+          "common_name",
+          "date",
+          "eventTime",
+          "dataResourceName",
+          "datasetName",
+          "samplingProtocol",
+          "samplingEffort",
+          "occurrenceStatus",
+          "basisOfRecord",
+          "coordinateUncertaintyInMeters",
+          "identificationVerificationStatus",
+          "assertions",
+          "longitude",
+          "latitude"
+        ]
+      },
+      "quality_controls": [
+        "Retain presence records inside the configured date window.",
+        "Require species, date, longitude, and latitude.",
+        "Retain configured in-situ basis-of-record classes.",
+        "Screen and classify sampling protocols.",
+        "Apply CoordinateCleaner equal-coordinate, sea, and zero-coordinate tests.",
+        "Apply the 2500 m coordinate-uncertainty rule and its configured protocol exception.",
+        "Deduplicate species-date-coordinate records.",
+        "Apply configured broad range checks for selected Tasmanian endemic and mainland-obligate species."
+      ],
+      "first_pipeline_target": "raw_ala_file"
+    },
+    {
+      "id": "avonet_trait_set",
+      "metadata_file": "metadata/inputs/avonet_traits.json",
+      "path": "inputs/data_raw/species/trait_set.csv",
+      "format": "CSV",
+      "required": true,
+      "frozen_for_reproduction": true,
+      "generated_by_pipeline": false,
+      "bytes": 48433,
+      "sha256": null,
+      "source": {
+        "provider": "AVONET",
+        "dataset_version": null,
+        "persistent_identifier": null,
+        "accessed_at": null,
+        "citation": null,
+        "licence": "CC BY 4.0, as supplied by the author; confirm the exact AVONET release and citation.",
+        "redistribution_permitted": true,
+        "author_processing": null
+      },
+      "role": "Species matching and trait data for the fourth-corner GLLVM.",
+      "schema": {
+        "species_match_field": "species1",
+        "model_fields": {
+          "mass": {
+            "type": "numeric",
+            "unit": "g",
+            "transformation": "natural logarithm followed by centring and scaling across retained species"
+          },
+          "hand_wing_index": {
+            "type": "numeric",
+            "unit": "dimensionless index",
+            "transformation": "centring and scaling across retained species"
+          }
+        },
+        "all_fields": [
+          "sequence",
+          "species1",
+          "family1",
+          "order1",
+          "avibase_id1",
+          "total_individuals",
+          "female",
+          "male",
+          "unknown",
+          "complete_measures",
+          "beak_length_culmen",
+          "beak_length_nares",
+          "beak_width",
+          "beak_depth",
+          "tarsus_length",
+          "wing_length",
+          "kipps_distance",
+          "secondary1",
+          "hand_wing_index",
+          "tail_length",
+          "mass",
+          "mass_source",
+          "mass_refs_other",
+          "inference",
+          "traits_inferred",
+          "reference_species",
+          "habitat",
+          "habitat_density",
+          "migration",
+          "trophic_level",
+          "trophic_niche",
+          "primary_lifestyle",
+          "min_latitude",
+          "max_latitude",
+          "centroid_latitude",
+          "centroid_longitude",
+          "range_size",
+          "species"
+        ]
+      },
+      "quality_controls": [
+        "Require unique species1 values.",
+        "Require positive finite mass and finite hand_wing_index for matched species.",
+        "Report species that pass occupancy filtering but lack matching trait records.",
+        "Align the trait matrix exactly to the GLLVM response-matrix species order."
+      ],
+      "first_pipeline_target": "species_traits_file"
+    },
+    {
+      "id": "study_area",
+      "metadata_file": "metadata/inputs/study_area.json",
+      "path": "inputs/data_raw/spatial_grids/study_area.shp",
+      "sidecars": [
+        "inputs/data_raw/spatial_grids/study_area.dbf",
+        "inputs/data_raw/spatial_grids/study_area.prj",
+        "inputs/data_raw/spatial_grids/study_area.shx"
+      ],
+      "format": "ESRI Shapefile",
+      "required": true,
+      "frozen_for_reproduction": true,
+      "generated_by_pipeline": false,
+      "sha256": null,
+      "sidecar_sha256": null,
+      "source": {
+        "provider": null,
+        "dataset_version": null,
+        "persistent_identifier": null,
+        "accessed_or_created_at": null,
+        "creation_method": null,
+        "citation": null,
+        "licence": null,
+        "redistribution_permitted": null
+      },
+      "role": "Boundary used to generate the analysis hexagons and crop and mask both raw rasters.",
+      "schema": {
+        "geometry_type": "polygon",
+        "required_fields": [
+          "geometry"
+        ]
+      },
+      "first_pipeline_target": "study_area_files"
+    },
+    {
+      "id": "ibra7_subregions",
+      "metadata_file": "metadata/inputs/ibra7_subregions.json",
+      "path": "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.shp",
+      "sidecars": [
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.dbf",
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.prj",
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.shx",
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.shp.xml"
+      ],
+      "format": "ESRI Shapefile",
+      "required": true,
+      "frozen_for_reproduction": true,
+      "generated_by_pipeline": false,
+      "sha256": null,
+      "sidecar_sha256": null,
+      "source": {
+        "provider": "Australian Government Department of Sustainability, Environment, Water, Population and Communities",
+        "dataset_version": "IBRA 7.0",
+        "persistent_identifier": "ISOCW0501015457",
+        "accessed_at": null,
+        "citation": null,
+        "licence": "Creative Commons Attribution stated in the supplied metadata; exact licence version requires author confirmation",
+        "redistribution_permitted": null
+      },
+      "role": "Subregion polygons for regional convergence, GLLVM site grouping, and the Noisy Miner residualisation sensitivity analysis.",
+      "schema": {
+        "geometry_type": "polygon",
+        "source_crs": {
+          "epsg": 4283,
+          "name": "GDA94"
+        },
+        "required_fields": {
+          "SUB_NAME_7": "IBRA7 subregion name used as the regional analysis unit.",
+          "REG_NAME_7": "Broader IBRA7 region used by the Noisy Miner residualisation sensitivity analysis.",
+          "geometry": "Subregion polygon geometry."
+        }
+      },
+      "first_pipeline_target": "ibra_files"
+    },
+    {
+      "id": "clum_2023_v2_landuse",
+      "metadata_file": "metadata/inputs/clum_landuse.json",
+      "path": "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif",
+      "sidecars": [
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tfw",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.aux.xml",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.ovr",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.vat.cpg",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.vat.dbf",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.xml"
+      ],
+      "format": "GeoTIFF",
+      "required": true,
+      "frozen_for_reproduction": true,
+      "generated_by_pipeline": false,
+      "bytes": 300101632,
+      "sha256": null,
+      "sidecar_sha256": null,
+      "source": {
+        "provider": "Australian Bureau of Agricultural and Resource Economics and Sciences (ABARES)",
+        "dataset_version": "Catchment Scale Land Use of Australia – Update December 2023 version 2",
+        "persistent_identifier": "10.25814/2w2p-ph98",
+        "accessed_at": null,
+        "citation": "ABARES 2024, Catchment Scale Land Use of Australia – Update December 2023 version 2, Australian Bureau of Agricultural and Resource Economics and Sciences, Canberra, June.",
+        "licence": "CC BY 4.0, except third-party content where separate terms apply.",
+        "redistribution_permitted": true
+      },
+      "local_metadata": {
+        "metadata_file": "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.xml",
+        "file_creation_date": "2024-06-21",
+        "lineage": "The supplied metadata records ExtractByMask from clum_2023_v8.tif to the December 2023 CLUM 50 m v2 product."
+      },
+      "role": "Raw land-use raster reclassified into intact, native production, plantation, agriculture, and urban classes.",
+      "schema": {
+        "source_class_field": "SIMPN",
+        "class_mapping": {
+          "intact": [
+            1,
+            2,
+            3
+          ],
+          "native_production": [
+            4,
+            5
+          ],
+          "plantation": [
+            6
+          ],
+          "agriculture": [
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            15
+          ],
+          "urban": [
+            14,
+            16,
+            17,
+            18
+          ],
+          "missing": [
+            19
+          ]
+        }
+      },
+      "first_pipeline_target": "landuse_raster_files"
+    },
+    {
+      "id": "nvis_major_vegetation_groups",
+      "metadata_file": "metadata/inputs/nvis_vegetation.json",
+      "path": "inputs/data_raw/raw_rasters/nvis_mvg.tif",
+      "sidecars": [
+        "inputs/data_raw/raw_rasters/nvis_mvg.tif.aux.xml"
+      ],
+      "format": "GeoTIFF",
+      "required": true,
+      "frozen_for_reproduction": true,
+      "generated_by_pipeline": false,
+      "bytes": 85411268,
+      "sha256": null,
+      "sidecar_sha256": null,
+      "source": {
+        "provider": "NVIS product publisher to be confirmed from the raster release metadata",
+        "dataset_version": "NVIS 7.0",
+        "persistent_identifier": null,
+        "accessed_at": null,
+        "citation": null,
+        "licence": "Author reports CC Attribution for the vegetation data; confirm exact product licence/version. The supplied MVG fact-sheet licence does not establish the raster's licence.",
+        "redistribution_permitted": null
+      },
+      "local_metadata": {
+        "metadata_file": "inputs/data_raw/raw_rasters/nvis_mvg.tif.aux.xml",
+        "band_description": "NVIS7_0_AUST_EXT_MVG_ALB"
+      },
+      "role": "Raw vegetation raster reclassified into vegetation formations and binary woodland.",
+      "schema": {
+        "source_class_field": "raster cell value",
+        "class_mapping": {
+          "wet_dense": [
+            1,
+            2,
+            15
+          ],
+          "sclerophyll": [
+            3,
+            4,
+            5,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            29
+          ],
+          "mallee_arid": [
+            6,
+            13,
+            14,
+            31,
+            32
+          ],
+          "open_cleared": [
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            23,
+            25,
+            26,
+            27,
+            99
+          ],
+          "missing": [
+            24,
+            28
+          ],
+          "other_unmapped_numeric_values": 5
+        },
+        "binary_woodland_mapping": {
+          "woodland": [
+            1,
+            2,
+            3
+          ],
+          "nonhabitat": [
+            4,
+            5
+          ]
+        }
+      },
+      "first_pipeline_target": "vegetation_raster_files"
+    }
+  ],
+  "derived_datasets": [
+    {
+      "id": "generated_hex_grid",
+      "path": "inputs/data_processed/spatial_grids/hex_2_5.shp",
+      "producer_target": "hex_grid_files",
+      "key": "hex_id",
+      "description": "Analysis grid created from the study area in EPSG:3577. hex_id values are assigned before spatial filtering and preserved as character identifiers."
+    },
+    {
+      "id": "cleaned_occurrences",
+      "path": "inputs/data_processed/ala_cleaned_2020_inext.csv",
+      "producer_target": "cleaning_files",
+      "key": null,
+      "description": "Occurrence records remaining after the configured temporal, taxonomic, protocol, coordinate, duplicate, and broad species-range filters."
+    },
+    {
+      "id": "hex_occurrences",
+      "path": "inputs/data_processed/hex_occ_2_5_2020_inext.csv",
+      "producer_target": "hex_assignment_files",
+      "key": "hex_id",
+      "description": "Cleaned occurrence records assigned to exactly one generated hexagon."
+    },
+    {
+      "id": "chao2_site_table",
+      "path": "inputs/data_processed/chao2_inext_2020.csv",
+      "producer_target": "inext_matrix_files",
+      "key": "hex_id",
+      "fields": {
+        "S_obs": "Observed species richness.",
+        "sampling_units": "Number of distinct incidence units.",
+        "chao2_estimate": "Estimated asymptotic Chao2 richness.",
+        "chao2_se": "Standard error of the Chao2 richness estimate when available.",
+        "chao2_completeness": "Observed richness divided by estimated richness, capped at one.",
+        "sample_coverage": "Sample coverage returned by iNEXT::DataInfo when available.",
+        "Q1": "Species detected in exactly one incidence unit.",
+        "Q2": "Species detected in exactly two incidence units.",
+        "chao_status": "ok for valid estimates and failed otherwise."
+      },
+      "retention_rule": "chao_status is ok; sampling_units >= 6; S_obs >= 5; chao2_completeness >= 0.70"
+    },
+    {
+      "id": "retained_hex_metadata",
+      "path": "inputs/data_processed/hex_metadata_2_5km_2020_inext.csv",
+      "producer_target": "inext_matrix_files",
+      "key": "hex_id",
+      "fields": {
+        "n_checklists": "Number of distinct incidence units at the site.",
+        "n_miner_checklists": "Number of incidence units containing Noisy Miner.",
+        "miner_detection_rate": "n_miner_checklists divided by n_checklists."
+      }
+    },
+    {
+      "id": "species_presence_absence_matrix",
+      "path": "inputs/data_processed/species_matrix_2_5km_2020_inext.rds",
+      "producer_target": "inext_matrix_files",
+      "row_key": "hex_id",
+      "column_key": "species scientific name",
+      "values": {
+        "0": "not detected",
+        "1": "detected"
+      }
+    },
+    {
+      "id": "selected_landscape_metrics",
+      "path": "inputs/data_processed/lsm_processed/selected_metrics_2_5km.rds",
+      "producer_target": "landscape_metrics_file",
+      "key": "hex_id",
+      "window_radius_m": 2500,
+      "complete_cases_required": true,
+      "fields": {
+        "pland_wet_dense_2500m": "Percentage of the window in wet/dense vegetation.",
+        "pland_sclerophyll_2500m": "Percentage of the window in sclerophyll vegetation.",
+        "pland_mallee_arid_2500m": "Percentage of the window in mallee/arid vegetation.",
+        "PLAND_habitat_2500m": "Sum of wet/dense, sclerophyll, and mallee/arid percentages.",
+        "area_mn_woodland_2500m": "Mean binary-woodland patch area in square metres.",
+        "cohesion_woodland_2500m": "Binary-woodland patch cohesion index.",
+        "pland_native_prod_2500m": "Percentage of the window in native-production land use.",
+        "pland_plantation_2500m": "Percentage of the window in plantation land use.",
+        "pland_agriculture_2500m": "Percentage of the window in agricultural land use.",
+        "pland_urban_2500m": "Percentage of the window in urban land use."
+      },
+      "missing_value_rule": "Missing PLAND classes become zero only when another PLAND class confirms coverage for the site. Entirely missing sites remain missing. Patch area and cohesion are never replaced with zero."
+    },
+    {
+      "id": "aligned_model_data",
+      "path": "inputs/data_processed/model_df_2_5km_2020_inext.rds",
+      "producer_target": "model_data_files",
+      "key": "hex_id",
+      "description": "Aligned site-level landscape, sampling, beta-diversity summary, and spatial-coordinate data after complete-landscape and urban-cover filtering.",
+      "principal_fields": {
+        "mean_richness_difference": "Mean pairwise Podani-Jaccard richness-difference component.",
+        "mean_replacement": "Mean pairwise Podani-Jaccard replacement component.",
+        "replacement_ratio": "mean_replacement divided by the sum of the two mean components.",
+        "x": "Site x-coordinate in metres in EPSG:32655.",
+        "y": "Site y-coordinate in metres in EPSG:32655.",
+        "x_km": "Model x-coordinate in kilometres.",
+        "y_km": "Model y-coordinate in kilometres.",
+        "log_effort": "Natural logarithm of max(n_checklists, 1)."
+      }
+    },
+    {
+      "id": "beta_diversity_matrices",
+      "path": "inputs/data_processed/beta_matrices_2020_inext.rds",
+      "producer_target": "model_data_files",
+      "description": "Aligned total, replacement, and richness-difference Podani-Jaccard dissimilarity matrices."
+    }
+  ],
+  "analysis_outputs": {
+    "model_checkpoints": "outputs/models/",
+    "tables": "outputs/tables/",
+    "figures": "outputs/figures/",
+    "diagnostics": "outputs/diagnostics/",
+    "sensitivity": "outputs/sensitivity/",
+    "tracked_in_git": false
+  },
+  "excluded_legacy_inputs": [
+    {
+      "path": "inputs/data_raw/spatial_grids/hex_2_5.*",
+      "reason": "The current pipeline generates its own hexagon grid from study_area.shp."
+    },
+    {
+      "path": "inputs/data_raw/lsm_processed/",
+      "reason": "The current pipeline reclassifies the raw rasters and estimates landscape metrics."
+    }
+  ],
+  "reproducibility": {
+    "main_pipeline": "_targets.R",
+    "sensitivity_pipeline": "_targets_sensitivity.R",
+    "analysis_configuration": "R/00_main_config.R",
+    "sensitivity_configuration": "R/01_sensitivity_config.R",
+    "software_lockfile": "renv.lock",
+    "pipeline_caches_tracked_in_git": false,
+    "note": "The Zenodo data release, Git release, and renv.lock should be frozen as one publication version."
+  }
+}

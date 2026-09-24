@@ -1,0 +1,190 @@
+{
+  "schema_version": "1.0",
+  "id": "ala_occurrence_snapshot",
+  "dataset_name": "Frozen Atlas of Living Australia occurrence export",
+  "data_file": "inputs/data_raw/species/ala_df_raw.csv",
+  "format": "CSV",
+  "source": {
+    "provider": "Atlas of Living Australia",
+    "frozen_snapshot": true,
+    "exact_query_id": null,
+    "access_date": "2026-02-10",
+    "citation": null,
+    "licence": "Must be resolved at contributing dataset level before redistribution. ALA's general support for CC BY/CC0 does not establish the licence of every record in this export.",
+    "redistribution_status": "author review required"
+  },
+  "acquisition_reference": {
+    "script": "scripts/data_acquisition/ala_query_reference.R",
+    "function": "get_ALA_data",
+    "limitation": "Reference helper selects 12 fields and does not establish the exact taxon list, boundary, query date or later edits. The frozen CSV has 17 columns, including basisOfRecord and coordinateUncertaintyInMeters that the helper does not request."
+  },
+  "schema": {
+    "record_unit": "One ALA occurrence record",
+    "coordinate_order": [
+      "longitude",
+      "latitude"
+    ],
+    "workflow_required_fields": [
+      "occurrenceStatus",
+      "date",
+      "species",
+      "longitude",
+      "latitude",
+      "basisOfRecord",
+      "samplingProtocol",
+      "dataResourceName",
+      "coordinateUncertaintyInMeters"
+    ],
+    "fields": [
+      {
+        "name": "family",
+        "source_field": "family",
+        "type": "text",
+        "definition": "Taxonomic family reported for the occurrence.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "genus",
+        "source_field": "genus",
+        "type": "text",
+        "definition": "Taxonomic genus reported for the occurrence.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "species",
+        "source_field": "species",
+        "type": "text",
+        "definition": "Scientific species name used to identify and count the bird taxon.",
+        "workflow_role": "required_taxon; used in cleaning and community matrices"
+      },
+      {
+        "name": "common_name",
+        "source_field": "vernacularName",
+        "type": "text",
+        "definition": "ALA vernacular name; renamed from vernacularName in the acquisition helper.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "date",
+        "source_field": "eventDate",
+        "type": "date",
+        "definition": "Observation date; renamed from eventDate and parsed as a date.",
+        "workflow_role": "required; date-window filter and month-year incidence unit"
+      },
+      {
+        "name": "eventTime",
+        "source_field": "eventTime",
+        "type": "text/time",
+        "definition": "Observation time when supplied by the contributing dataset.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "dataResourceName",
+        "source_field": "dataResourceName",
+        "type": "text",
+        "definition": "ALA data resource that supplied the record; also used to screen records with missing protocol metadata.",
+        "workflow_role": "required; protocol screening"
+      },
+      {
+        "name": "datasetName",
+        "source_field": "datasetName",
+        "type": "text",
+        "definition": "Name of the contributing dataset within its data resource.",
+        "workflow_role": "context; useful when reviewing source-specific reuse terms"
+      },
+      {
+        "name": "samplingProtocol",
+        "source_field": "samplingProtocol",
+        "type": "text",
+        "definition": "Method or protocol reported for collecting the observation.",
+        "workflow_role": "required; protocol screening and coordinate-uncertainty exception"
+      },
+      {
+        "name": "samplingEffort",
+        "source_field": "samplingEffort",
+        "type": "text",
+        "definition": "Effort description supplied with the observation, if recorded.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "occurrenceStatus",
+        "source_field": "occurrenceStatus",
+        "type": "text/category",
+        "definition": "Whether the taxon was recorded as present or absent; the workflow retains PRESENT records.",
+        "workflow_role": "required; presence filter"
+      },
+      {
+        "name": "basisOfRecord",
+        "source_field": "basisOfRecord",
+        "type": "text/category",
+        "definition": "ALA record class describing how the occurrence was documented; the workflow retains configured observation classes.",
+        "workflow_role": "required; record-type filter"
+      },
+      {
+        "name": "coordinateUncertaintyInMeters",
+        "source_field": "coordinateUncertaintyInMeters",
+        "type": "numeric; metres",
+        "definition": "Reported uncertainty radius around the supplied coordinates, in metres.",
+        "workflow_role": "required; 2500 m threshold with configured protocol exception"
+      },
+      {
+        "name": "identificationVerificationStatus",
+        "source_field": "identificationVerificationStatus",
+        "type": "text/category",
+        "definition": "Identification verification status supplied by ALA or the contributing dataset.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "assertions",
+        "source_field": "assertions",
+        "type": "text",
+        "definition": "ALA assertions or validation notes associated with the record.",
+        "workflow_role": "context"
+      },
+      {
+        "name": "longitude",
+        "source_field": "decimalLongitude",
+        "type": "numeric; decimal degrees",
+        "definition": "WGS 84 longitude; renamed from decimalLongitude.",
+        "workflow_role": "required; point location"
+      },
+      {
+        "name": "latitude",
+        "source_field": "decimalLatitude",
+        "type": "numeric; decimal degrees",
+        "definition": "WGS 84 latitude; renamed from decimalLatitude.",
+        "workflow_role": "required; point location"
+      }
+    ],
+    "reference_query_fields": {
+      "selected_then_renamed": [
+        "decimalLongitude -> longitude",
+        "decimalLatitude -> latitude",
+        "vernacularName -> common_name",
+        "eventDate -> date"
+      ],
+      "selected_without_renaming": [
+        "family",
+        "genus",
+        "species",
+        "dataResourceName",
+        "samplingProtocol",
+        "samplingEffort",
+        "occurrenceStatus",
+        "datasetName"
+      ],
+      "present_in_frozen_export_but_not_selected_by_reference_helper": [
+        "eventTime",
+        "basisOfRecord",
+        "coordinateUncertaintyInMeters",
+        "identificationVerificationStatus",
+        "assertions"
+      ]
+    }
+  },
+  "processing_notes": [
+    "The frozen export, not a new query, is the reproducibility input.",
+    "Record-level source licences must be checked before placing the export or a subset in a public data release.",
+    "The configured 2500 m coordinate-uncertainty rule is an analysis filter, not a property of the source dataset."
+  ]
+}

@@ -1,0 +1,282 @@
+{
+  "schema_version": "1.0",
+  "id": "nvis_major_vegetation_groups",
+  "dataset_name": "National Vegetation Information System Major Vegetation Groups raster",
+  "data_file": "inputs/data_raw/raw_rasters/nvis_mvg.tif",
+  "companion_files": [
+    ".tif.aux.xml"
+  ],
+  "format": "Categorical GeoTIFF",
+  "source": {
+    "publisher": null,
+    "version": "NVIS 7.0, raster band description NVIS7_0_AUST_EXT_MVG_ALB",
+    "citation": null,
+    "licence": "Author reports CC Attribution for the vegetation dataset; exact product licence/version and citation need confirmation before redistribution.",
+    "redistribution_status": "verify the raster product's own terms. The supplied 2017 MVG factsheets are explanatory documents and their licence does not automatically determine the raster licence."
+  },
+  "source_documentation": [
+    "inputs/data_raw/raw_rasters/nvis_mvg.tif.aux.xml",
+    "inputs/data_raw/documentation/mvg-introduction.pdf",
+    "inputs/data_raw/documentation/mvg1-nvis-rainforests-and-vine-thickets.pdf",
+    "inputs/data_raw/documentation/mvg2-nvis-eucalypt-tall-open-forests.pdf",
+    "inputs/data_raw/documentation/mvg3-nvis-eucalypt-open-forest.pdf",
+    "inputs/data_raw/documentation/mvg4-nvis-eucalypt-low-open-forest.pdf",
+    "inputs/data_raw/documentation/mvg5-nvis-eucalypt-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg6-nvis-acacia-forests-and-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg7-nvis-callitris-forests-and-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg8-nvis-casuarina-forests-and-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg9-nvis-maleuca-forests-and-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg10-nvis-other-forests-and-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg11-nvis-eucalypt-open-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg12-nvis-eucalypt-woodlands-grasslands.pdf",
+    "inputs/data_raw/documentation/mvg13-nvis-acacia-open-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg14-nvis-mallee-woodlands-and-shrublands.pdf",
+    "inputs/data_raw/documentation/mvg15-nvis-low-closed-forests-and-tall-closed-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg16-nvis-acacia-shrublands.pdf",
+    "inputs/data_raw/documentation/mvg17-nvis-other-shrublands.pdf",
+    "inputs/data_raw/documentation/mvg31-nvis-other-open-woodlands.pdf",
+    "inputs/data_raw/documentation/mvg32-nvis-woodlands-and-sparse-mallee-shrublands.pdf"
+  ],
+  "schema": {
+    "pixel_value_field": "Value",
+    "pixel_value_definition": "NVIS Major Vegetation Group category code stored in the raster cell.",
+    "raster_attribute_table_fields": [
+      {
+        "name": "Value",
+        "definition": "NVIS Major Vegetation Group code used as the raster cell value."
+      },
+      {
+        "name": "MVG_NAME",
+        "definition": "Official Major Vegetation Group name for the code."
+      },
+      {
+        "name": "MVG_COMMON_DESC",
+        "definition": "Common descriptive name or summary for the Major Vegetation Group."
+      },
+      {
+        "name": "SORT_ORDER",
+        "definition": "Ordering field used by the supplied category table."
+      },
+      {
+        "name": "Count",
+        "definition": "Number of raster cells represented by the category-table row."
+      }
+    ],
+    "value_classes": [
+      {
+        "code": 1,
+        "name": "Rainforests and Vine Thickets"
+      },
+      {
+        "code": 2,
+        "name": "Eucalypt Tall Open Forests"
+      },
+      {
+        "code": 3,
+        "name": "Eucalypt Open Forests"
+      },
+      {
+        "code": 4,
+        "name": "Eucalypt Low Open Forests"
+      },
+      {
+        "code": 5,
+        "name": "Eucalypt Woodlands"
+      },
+      {
+        "code": 6,
+        "name": "Acacia Forests and Woodlands"
+      },
+      {
+        "code": 7,
+        "name": "Callitris Forests and Woodlands"
+      },
+      {
+        "code": 8,
+        "name": "Casuarina Forests and Woodlands"
+      },
+      {
+        "code": 9,
+        "name": "Melaleuca Forests and Woodlands"
+      },
+      {
+        "code": 10,
+        "name": "Other Forests and Woodlands"
+      },
+      {
+        "code": 11,
+        "name": "Eucalypt Open Woodlands"
+      },
+      {
+        "code": 12,
+        "name": "Tropical Eucalypt Woodlands/Grasslands"
+      },
+      {
+        "code": 13,
+        "name": "Acacia Open Woodlands"
+      },
+      {
+        "code": 14,
+        "name": "Mallee Woodlands and Shrublands"
+      },
+      {
+        "code": 15,
+        "name": "Low Closed Forests and Tall Closed Shrublands"
+      },
+      {
+        "code": 16,
+        "name": "Acacia Shrublands"
+      },
+      {
+        "code": 17,
+        "name": "Other Shrublands"
+      },
+      {
+        "code": 18,
+        "name": "Heathlands"
+      },
+      {
+        "code": 19,
+        "name": "Tussock Grasslands"
+      },
+      {
+        "code": 20,
+        "name": "Hummock Grasslands"
+      },
+      {
+        "code": 21,
+        "name": "Other Grasslands, Herblands, Sedgelands and Rushlands"
+      },
+      {
+        "code": 22,
+        "name": "Chenopod Shrublands, Samphire Shrublands and Forblands"
+      },
+      {
+        "code": 23,
+        "name": "Mangroves"
+      },
+      {
+        "code": 24,
+        "name": "Inland aquatic - freshwater, salt lakes, lagoons"
+      },
+      {
+        "code": 25,
+        "name": "Cleared, non-native vegetation, buildings"
+      },
+      {
+        "code": 26,
+        "name": "Unclassified native vegetation"
+      },
+      {
+        "code": 27,
+        "name": "Naturally bare - sand, rock, claypan, mudflat"
+      },
+      {
+        "code": 28,
+        "name": "Sea and estuaries"
+      },
+      {
+        "code": 29,
+        "name": "Regrowth, modified native vegetation"
+      },
+      {
+        "code": 31,
+        "name": "Other Open Woodlands"
+      },
+      {
+        "code": 32,
+        "name": "Mallee Open Woodlands and Sparse Mallee Shrublands"
+      },
+      {
+        "code": 99,
+        "name": "Unknown / no data"
+      }
+    ],
+    "workflow_reclassification": [
+      {
+        "source_codes": [
+          1,
+          2,
+          15
+        ],
+        "output_class": 1,
+        "output_name": "wet_dense"
+      },
+      {
+        "source_codes": [
+          3,
+          4,
+          5,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          29
+        ],
+        "output_class": 2,
+        "output_name": "sclerophyll"
+      },
+      {
+        "source_codes": [
+          6,
+          13,
+          14,
+          31,
+          32
+        ],
+        "output_class": 3,
+        "output_name": "mallee_arid"
+      },
+      {
+        "source_codes": [
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          25,
+          26,
+          27,
+          99
+        ],
+        "output_class": 4,
+        "output_name": "open_cleared"
+      },
+      {
+        "source_codes": [
+          24,
+          28
+        ],
+        "output_class": null,
+        "output_name": "excluded aquatic / sea (NA)"
+      }
+    ],
+    "fallback_rule": "Numeric values absent from the category table map to class 5 (nonhabitat_other); listed categories with no mapping become NA.",
+    "binary_woodland_mapping": [
+      {
+        "reclassified_classes": [
+          1,
+          2,
+          3
+        ],
+        "output_value": 1,
+        "output_name": "woodland"
+      },
+      {
+        "reclassified_classes": [
+          4,
+          5
+        ],
+        "output_value": 2,
+        "output_name": "nonhabitat"
+      }
+    ],
+    "interpretation_note": "The configured class names are analysis groupings. For example, 'mallee_arid' includes the listed Acacia/open-woodland codes; the grouping documents the current workflow and does not replace official MVG names.",
+    "document_version_note": "The supplied MVG introduction/factsheets describe NVIS Version 4.2 (2017). The raster's own band description identifies NVIS 7.0; use the raster category table for its code names."
+  }
+}

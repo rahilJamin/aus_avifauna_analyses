@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "id": "ibra7_subregions",
+  "dataset_name": "Interim Biogeographic Regionalisation for Australia, version 7.0, subregions",
+  "data_file": "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.shp",
+  "companion_files": [
+    ".shp",
+    ".shx",
+    ".dbf",
+    ".prj",
+    ".shp.xml"
+  ],
+  "format": "ESRI Shapefile",
+  "source": {
+    "provider": "Australian Government Department of Sustainability, Environment, Water, Population and Communities",
+    "version": "IBRA 7.0",
+    "persistent_identifier": "ISOCW0501015457",
+    "licence": "Supplied metadata states Creative Commons Attribution; exact licence version requires confirmation.",
+    "redistribution_status": "confirm exact licence version and citation before redistribution"
+  },
+  "schema": {
+    "geometry_type": "polygon",
+    "coordinate_reference_system": {
+      "epsg": 4283,
+      "name": "GDA94"
+    },
+    "fields": [
+      {
+        "name": "SUB_CODE_7",
+        "type": "text",
+        "definition": "IBRA7 subregion code."
+      },
+      {
+        "name": "SUB_NAME_7",
+        "type": "text",
+        "definition": "IBRA7 subregion name; used as the regional analysis unit."
+      },
+      {
+        "name": "REG_CODE_7",
+        "type": "text",
+        "definition": "Code of the broader IBRA7 region containing the subregion."
+      },
+      {
+        "name": "REG_NAME_7",
+        "type": "text",
+        "definition": "Name of the broader IBRA7 region; used for regional grouping in the Noisy Miner residualisation sensitivity."
+      },
+      {
+        "name": "HECTARES",
+        "type": "numeric",
+        "definition": "Area of the polygon in hectares, as supplied."
+      },
+      {
+        "name": "SQ_KM",
+        "type": "numeric",
+        "definition": "Area of the polygon in square kilometres, as supplied."
+      },
+      {
+        "name": "REC_ID",
+        "type": "numeric",
+        "definition": "Record identifier in the source attribute table."
+      },
+      {
+        "name": "SUB_CODE_6",
+        "type": "text",
+        "definition": "Corresponding IBRA6 subregion code."
+      },
+      {
+        "name": "SUB_NAME_6",
+        "type": "text",
+        "definition": "Corresponding IBRA6 subregion name."
+      },
+      {
+        "name": "SUB_NO_61_",
+        "type": "numeric",
+        "definition": "Source cross-reference or numbering field for IBRA6 subregions; retain source definition."
+      },
+      {
+        "name": "REG_CODE_6",
+        "type": "text",
+        "definition": "Corresponding IBRA6 region code."
+      },
+      {
+        "name": "REG_NAME_6",
+        "type": "text",
+        "definition": "Corresponding IBRA6 region name."
+      },
+      {
+        "name": "REG_NO_61",
+        "type": "numeric",
+        "definition": "Source cross-reference or numbering field for IBRA6 regions; retain source definition."
+      },
+      {
+        "name": "FEAT_ID",
+        "type": "text",
+        "definition": "Source feature identifier."
+      },
+      {
+        "name": "Shape_Leng",
+        "type": "numeric",
+        "definition": "Stored geometry-length attribute from the source file."
+      },
+      {
+        "name": "Shape_Area",
+        "type": "numeric",
+        "definition": "Stored geometry-area attribute from the source file."
+      },
+      {
+        "name": "geometry",
+        "type": "polygon",
+        "definition": "IBRA7 subregion boundary geometry."
+      }
+    ]
+  },
+  "author_confirmation_needed": [
+    "Complete the official citation and exact licence version from the source release."
+  ]
+}

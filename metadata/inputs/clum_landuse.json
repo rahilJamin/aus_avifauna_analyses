@@ -1,0 +1,212 @@
+{
+  "schema_version": "1.0",
+  "id": "clum_2023_v2_landuse",
+  "dataset_name": "Catchment Scale Land Use of Australia — Update December 2023 version 2",
+  "data_file": "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif",
+  "companion_files": [
+    ".tfw",
+    ".tif.aux.xml",
+    ".tif.ovr",
+    ".tif.vat.cpg",
+    ".tif.vat.dbf",
+    ".tif.xml"
+  ],
+  "format": "50 m categorical GeoTIFF",
+  "source": {
+    "publisher": "Australian Bureau of Agricultural and Resource Economics and Sciences (ABARES), Australian Government Department of Agriculture, Fisheries and Forestry",
+    "version": "December 2023 version 2",
+    "published": "2024-06-27",
+    "citation": "ABARES 2024, Catchment Scale Land Use of Australia – Update December 2023 version 2, Australian Bureau of Agricultural and Resource Economics and Sciences, Canberra, June.",
+    "doi": "10.25814/2w2p-ph98",
+    "licence": "CC BY 4.0, as stated in the supplied product descriptive metadata; third-party content may have separate terms.",
+    "redistribution_status": "attribution required; retain the source citation and any applicable third-party notices"
+  },
+  "source_documentation": "inputs/data_raw/documentation/CLUM_DescriptiveMetadata_December2023_v2.pdf",
+  "schema": {
+    "pixel_value_field": "Value",
+    "pixel_value_definition": "ALUM v8 land-use code stored in each raster cell. The category table links each Value to a SIMPN simplified land-use group.",
+    "raster_attribute_table_fields": [
+      {
+        "name": "OID",
+        "definition": "Raster attribute table row identifier."
+      },
+      {
+        "name": "Value",
+        "definition": "Pixel value / ALUM v8 land-use code."
+      },
+      {
+        "name": "Count",
+        "definition": "Number of raster cells represented by the category-table row."
+      },
+      {
+        "name": "LU_CODEV8",
+        "definition": "ALUM version 8 land-use code."
+      },
+      {
+        "name": "LU_V8N",
+        "definition": "ALUM version 8 land-use name."
+      },
+      {
+        "name": "TERTV8",
+        "definition": "Tertiary ALUM version 8 classification field."
+      },
+      {
+        "name": "SECV8",
+        "definition": "Secondary ALUM version 8 classification field."
+      },
+      {
+        "name": "PRIMV8",
+        "definition": "Primary ALUM version 8 classification field."
+      },
+      {
+        "name": "SIMPN",
+        "definition": "Simplified land-use class number used by this workflow for reclassification."
+      },
+      {
+        "name": "SIMP",
+        "definition": "Name of the simplified land-use class."
+      },
+      {
+        "name": "AGIND",
+        "definition": "Source agriculture indicator field; retain the product's coding."
+      }
+    ],
+    "simpn_classes": [
+      {
+        "code": 1,
+        "name": "Nature conservation"
+      },
+      {
+        "code": 2,
+        "name": "Managed resource protection"
+      },
+      {
+        "code": 3,
+        "name": "Other minimal use"
+      },
+      {
+        "code": 4,
+        "name": "Grazing native vegetation"
+      },
+      {
+        "code": 5,
+        "name": "Production native forests"
+      },
+      {
+        "code": 6,
+        "name": "Plantation forests"
+      },
+      {
+        "code": 7,
+        "name": "Grazing modified pastures"
+      },
+      {
+        "code": 8,
+        "name": "Dryland cropping"
+      },
+      {
+        "code": 9,
+        "name": "Dryland horticulture"
+      },
+      {
+        "code": 10,
+        "name": "Land in transition"
+      },
+      {
+        "code": 11,
+        "name": "Irrigated pastures"
+      },
+      {
+        "code": 12,
+        "name": "Irrigated cropping"
+      },
+      {
+        "code": 13,
+        "name": "Irrigated horticulture"
+      },
+      {
+        "code": 14,
+        "name": "Intensive horticulture and animal production"
+      },
+      {
+        "code": 15,
+        "name": "Rural residential and farm infrastructure"
+      },
+      {
+        "code": 16,
+        "name": "Urban residential"
+      },
+      {
+        "code": 17,
+        "name": "Other intensive uses"
+      },
+      {
+        "code": 18,
+        "name": "Mining and waste"
+      },
+      {
+        "code": 19,
+        "name": "Water"
+      }
+    ],
+    "workflow_reclassification": [
+      {
+        "source_simpn_codes": [
+          1,
+          2,
+          3
+        ],
+        "output_class": 1,
+        "output_name": "intact"
+      },
+      {
+        "source_simpn_codes": [
+          4,
+          5
+        ],
+        "output_class": 2,
+        "output_name": "native production"
+      },
+      {
+        "source_simpn_codes": [
+          6
+        ],
+        "output_class": 3,
+        "output_name": "plantation"
+      },
+      {
+        "source_simpn_codes": [
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          15
+        ],
+        "output_class": 4,
+        "output_name": "agriculture"
+      },
+      {
+        "source_simpn_codes": [
+          14,
+          16,
+          17,
+          18
+        ],
+        "output_class": 5,
+        "output_name": "urban"
+      },
+      {
+        "source_simpn_codes": [
+          19
+        ],
+        "output_class": null,
+        "output_name": "excluded water / NA"
+      }
+    ],
+    "interpretation_note": "The configured output label 'urban' combines source class 14 (intensive horticulture and animal production) with urban, other intensive, and mining/waste classes. This documents the current mapping; it does not redefine the source categories.",
+    "unmapped_category_rule": "Known SIMPN categories without a numeric output mapping become NA; source SIMPN 0 is nodata and is not listed as a land-use class."
+  }
+}
