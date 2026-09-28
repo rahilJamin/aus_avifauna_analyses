@@ -15,8 +15,8 @@
     "provider": "Australian Government Department of Sustainability, Environment, Water, Population and Communities",
     "version": "IBRA 7.0",
     "persistent_identifier": "ISOCW0501015457",
-    "licence": "Supplied metadata states Creative Commons Attribution; exact licence version requires confirmation.",
-    "redistribution_status": "confirm exact licence version and citation before redistribution"
+    "licence": "CC BY 3.0 https://creativecommons.org/licenses/by/3.0/au/",
+    "redistribution_status": "free to share and adapt, with attribution; see https://fed.dcceew.gov.au/datasets/8f7e2436a6d5436ca001fa7f2aee3fd8/about for details."
   },
   "schema": {
     "geometry_type": "polygon",

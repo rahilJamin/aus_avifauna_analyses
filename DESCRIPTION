@@ -3,16 +3,15 @@ Package: ausavifaunaanalyses
 Title: Reproducible Analysis of Australian Bird Communities
 Version: 0.1.0
 Authors@R:
-    person(given = c("Rahil", "Jasminkumar"),
+    person(given = c("Rahil"),
            family = "Amin",
-           role = "aut",
-           comment = c(ORCID = "0000-0002-6936-5732"))
+           role = "author")
 Description: Reproducible data processing, landscape analysis, beta-diversity
     modelling, regional-convergence analysis, and joint species-distribution
     modelling for Australian bird communities. The repository provides main,
     sensitivity, and reduced demonstration workflows managed with the targets
     package.
-License: MIT + file LICENSE
+License: file LICENSE
 URL: https://github.com/rahilJamin/aus_avifauna_analyses
 BugReports: https://github.com/rahilJamin/aus_avifauna_analyses/issues
 Depends:

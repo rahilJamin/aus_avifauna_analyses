@@ -8,11 +8,11 @@
   ],
   "format": "Categorical GeoTIFF",
   "source": {
-    "publisher": null,
+    "publisher": "Department of Climate Change, Energy, the Environment and Water",
     "version": "NVIS 7.0, raster band description NVIS7_0_AUST_EXT_MVG_ALB",
-    "citation": null,
-    "licence": "Author reports CC Attribution for the vegetation dataset; exact product licence/version and citation need confirmation before redistribution.",
-    "redistribution_status": "verify the raster product's own terms. The supplied 2017 MVG factsheets are explanatory documents and their licence does not automatically determine the raster licence."
+    "citation": "Department of Climate Change, Energy, the Environment and Water. (2023). National Vegetation Information System (NVIS) Major Vegetation Groups (MVG) raster. Retrieved from https://www.environment.gov.au/land/native-vegetation/nvis",
+    "licence": "CC BY 4.0 https://creativecommons.org/licenses/by/4.0/",
+    "redistribution_status": "Free to share and adapt, with attribution; see https://www.environment.gov.au/land/native-vegetation/nvis for details."
   },
   "source_documentation": [
     "inputs/data_raw/raw_rasters/nvis_mvg.tif.aux.xml",

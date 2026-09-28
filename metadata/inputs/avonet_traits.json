@@ -5,11 +5,11 @@
   "data_file": "inputs/data_raw/species/trait_set.csv",
   "format": "CSV",
   "source": {
-    "provider": "AVONET",
+    "provider": "AVONET: morphological, ecological and geographical data for all birds",
     "release_or_version": null,
-    "citation": null,
-    "licence": "CC BY 4.0 as supplied by the author; retain the source attribution and licence statement with redistributed copies.",
-    "redistribution_status": "confirm the exact AVONET release and document any author-side filtering or transformation"
+    "citation": "Tobias et al 2022 Ecology Letters doi: https://doi.org/10.111/ele.13898",
+    "licence": "CC BY 4.0 https://creativecommons.org/licenses/by/4.0/",
+    "redistribution_status": "Free to share and adapt, with attribution; see https://avonet.github.io/ for details."
   },
   "schema": {
     "record_unit": "One taxon or species row as represented in the supplied trait table",
