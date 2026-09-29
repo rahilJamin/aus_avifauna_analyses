@@ -251,7 +251,8 @@ produce_gllvm_outputs <- function(cfg) {
 
   matrix_edge_species <- c(
     "Anthochaera carunculata", "Anthochaera chrysoptera", "Entomyzon cyanotis",
-    "Anthochaera paradoxa", "Manorina melanocephala", "Phylidonyris novaehollandiae",
+    "Anthochaera paradoxa", "Manorina melanocephala", "Manorina melanophrys",
+    "Phylidonyris novaehollandiae",
     "Pardalotus striatus", "Pardalotus punctatus", "Acanthiza pusilla",
     "Acanthiza chrysorrhoa", "Colluricincla harmonica", "Eolophus roseicapilla",
     "Trichoglossus moluccanus", "Cacatua sanguinea", "Cacatua galerita",
@@ -270,6 +271,7 @@ produce_gllvm_outputs <- function(cfg) {
 
   open_country_species <- c(
     "Epthianura albifrons", "Ptilotula penicillata", "Nymphicus hollandicus",
+    "Melopsittacus undulatus",
     "Northiella haematogaster", "Psephotus haematonotus", "Neophema elegans",
     "Neophema chrysostoma", "Acanthagenys rufogularis", "Gavicalis virescens",
     "Malurus melanocephalus", "Artamus leucorynchus", "Taeniopygia guttata",
@@ -307,11 +309,11 @@ produce_gllvm_outputs <- function(cfg) {
       ecological_group = "Introduced species"
     )
   ) %>%
-    filter(species %in% unique(heatmap_df$species)) %>%
-    distinct(species, ecological_group)
+    filter(species %in% unique(heatmap_df$species))
 
-  # Only species in the author-defined ecological groups enter grouped summaries.
-  # Other modelled species remain visible in the all-species heatmap.
+  # Require one group per modelled species so grouped counts and proportions
+  # account for the full response matrix rather than silently omitting species.
+  validate_gllvm_species_groups(heatmap_df$species, species_group_key_all)
 
   selected_species_rank <- tibble(
     species = c(
