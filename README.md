@@ -21,6 +21,9 @@ The analyses share a common occurrence-cleaning, sampling-completeness, and
 landscape-data preparation workflow. Each model then applies the filters needed
 for its own analysis.
 
+The [manuscript](manuscript/manuscript.md) presents the study and links its main
+figures, so the paper can be read alongside the code and data documentation.
+
 ## Repository structure
 
 ```text
@@ -43,6 +46,10 @@ geb_repo/
 ├── metadata/
 │   ├── data_manifest.json      # Input/output inventory and workflow references
 │   └── inputs/                 # Field dictionaries and source class legends
+├── manuscript/
+│   ├── manuscript.md           # Paper text, equations, captions and main figures
+│   ├── references.bib          # Bibliographic source records
+│   └── figures/                # Five main figures displayed in the manuscript
 ├── renv.lock                  # Recorded R package versions
 ├── inputs/
 │   ├── data_raw/              # External data (Git-ignored)
@@ -54,6 +61,14 @@ geb_repo/
 
 `_targets.R` defines the workflow; the files in `pipeline/` keep each stage
 readable, and `R/functions/` contains the underlying methods.
+
+## Manuscript
+
+Read the [paper](manuscript/manuscript.md) in GitHub. Its five main figures are
+included under [`manuscript/figures/`](manuscript/figures/), and the bibliography
+source is [`manuscript/references.bib`](manuscript/references.bib). The manuscript
+contains its formatted reference list; the BibTeX file is retained for reference
+management and future document builds.
 
 ## Required data
 
@@ -306,6 +321,7 @@ automatically. `targets::tar_outdated()` shows what would be rebuilt before a ru
 | `outputs/sensitivity/appendix/` | Numbered, appendix-ready SVG figures and tables. |
 | `demo/data/inputs/` | Tracked input subsets for the quick-run demonstration. |
 | `demo/outputs/` | Locally generated demo data, models, tables and figures. |
+| `manuscript/` | Paper text, bibliography source and five main figures available without running the workflow. |
 
 Generated data, models, figures, and the `_targets/` and `_targets_sensitivity/`
 caches are Git-ignored.
