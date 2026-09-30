@@ -57,18 +57,21 @@ readable, and `R/functions/` contains the underlying methods.
 
 ## Required data
 
-The full analysis inputs are **not distributed in this repository**. Supply the
-following datasets at the paths specified in `R/00_main_config.R` before running
-the main pipeline. Shapefiles also need their accompanying `.shx`, `.dbf`, and
-`.prj` files. A reduced input set for the quick demo is included under
+The full analysis inputs are archived in one [Zenodo dataset](https://doi.org/10.5281/zenodo.23060743)
+(DOI: **10.5281/zenodo.23060743**) and are not distributed through GitHub.
+Download the source archives from that record and extract archives 01–05 at the
+repository root. They preserve the `inputs/data_raw/` paths required by
+`R/00_main_config.R`, including shapefile and raster sidecars. Archive 06
+contains supporting source documentation; archive 07 contains a frozen copy of
+the input metadata. A reduced input set for the quick demo is included under
 `demo/data/inputs/`.
 
 The machine-readable [`metadata/data_manifest.json`](metadata/data_manifest.json)
 indexes each input, its pipeline role, and the corresponding detailed metadata
 file. The input-specific JSON files define the columns and units, spatial
 attributes, source raster codes, and the exact reclassification used by the
-workflow. Fields that still need author confirmation are labelled in those
-files; they must be resolved before the Zenodo release.
+workflow. Where original acquisition details were not retained, the metadata
+states that limitation rather than inferring a source version or download ID.
 
 The workflow starts from these frozen external inputs. It creates the hexagon
 grid, cleaned records, retained site identifiers and landscape metrics during
@@ -83,9 +86,8 @@ execution; none of those derived objects needs to be supplied.
 | CLUM land-use raster and sidecars | `inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif` | [CLUM raster fields and SIMPN legend](metadata/inputs/clum_landuse.json) |
 | NVIS major-vegetation-group raster and sidecars | `inputs/data_raw/raw_rasters/nvis_mvg.tif` | [NVIS raster fields and reclassification](metadata/inputs/nvis_vegetation.json) |
 
-To reproduce the reported results, use the same versions of these datasets.
-Their provenance and access conditions should be supplied alongside the public
-release.
+To reproduce the reported results, use the frozen files from the Zenodo record.
+Their provenance and source-specific reuse terms are documented in `metadata/`.
 
 Use the frozen ALA snapshot for reproduction. Data acquisition is separate from
 the analysis: the targets pipeline does not submit a new ALA query or download

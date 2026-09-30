@@ -1,25 +1,23 @@
 {
   "schema_version": "1.0",
-  "status": "draft_author_metadata_required",
+  "status": "data_doi_recorded",
   "project": {
     "id": "geb-australian-bird-community-analysis",
     "analysis_id": "main_2020_onward_inext",
-    "repository_url": null,
+    "repository_url": "https://github.com/rahilJamin/aus_avifauna_analyses",
     "git_release": null,
     "description": "Frozen inputs and reproducible derived data for the 2020-onward GEB Australian bird-community analysis."
   },
   "release": {
     "repository": "Zenodo",
-    "doi": null,
+    "doi": "10.5281/zenodo.23060743",
     "version": null,
     "published_at": null,
-    "required_before_release": [
-      "Complete source versions, access dates, citations, and licences.",
-      "Confirm that redistribution is permitted for every archived external input.",
-      "Calculate SHA-256 checksums for the final archived files and sidecars.",
-      "Record the matching Git release and commit.",
-      "Replace this manifest status with complete."
-    ]
+    "post_publication_updates": [
+      "Record the Zenodo dataset version and publication date when confirmed from the published record.",
+      "Record the matching public Git release and commit after the repository metadata is updated."
+    ],
+    "provenance_limit": "The exact ALA download identifier and exact AVONET source-file release were not retained. The frozen input checksums identify the files used for this analysis."
   },
   "scope": {
     "taxon_group": "birds",
@@ -66,16 +64,16 @@
       "frozen_for_reproduction": true,
       "generated_by_pipeline": false,
       "bytes": 12375666725,
-      "sha256": null,
+      "sha256": "06decb14838d0a6d1d89385e1c63c414df8746c5cc50985bbe7ed967bf017065",
       "source": {
         "provider": "Atlas of Living Australia",
         "dataset_version": null,
         "query_or_download_id": null,
         "persistent_identifier": null,
-        "accessed_at": null,
-        "citation": null,
-        "licence": "Depends on the contributing dataset; ALA's general preference for CC BY/CC0 does not establish the licence of every record in this frozen export.",
-        "redistribution_permitted": null
+        "accessed_at": "2026-02-10",
+        "citation": "Atlas of Living Australia, frozen occurrence export accessed 2026-02-10; original resources are identified in the dataResourceName and datasetName fields.",
+        "licence": "Contributing-dataset licences vary and were not retained in this frozen CSV. The author confirms the export may be redistributed with appropriate attribution.",
+        "redistribution_permitted": true
       },
       "role": "Raw bird occurrences used for cleaning, spatial assignment, incidence-frequency richness, and species presence-absence data.",
       "authoritative_reproduction_note": "Use this frozen snapshot to reproduce the publication. A new ALA query may return changed records.",
@@ -142,16 +140,16 @@
       "frozen_for_reproduction": true,
       "generated_by_pipeline": false,
       "bytes": 48433,
-      "sha256": null,
+      "sha256": "e0855bfb60c6346f05620c59dd8cbe39a78fdcb61a6cb4695fa111de29f865a5",
       "source": {
         "provider": "AVONET",
-        "dataset_version": null,
+        "dataset_version": "Trait data associated with Tobias et al. (2022); exact source-file release was not recorded.",
         "persistent_identifier": null,
         "accessed_at": null,
-        "citation": null,
-        "licence": "CC BY 4.0, as supplied by the author; confirm the exact AVONET release and citation.",
+        "citation": "Tobias et al. (2022). AVONET: morphological, ecological and geographical data for all birds. Ecology Letters 25:581–597.",
+        "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0), confirmed by the author.",
         "redistribution_permitted": true,
-        "author_processing": null
+        "author_processing": "Study-specific table of 188 bird species; further source-file edits were not recorded."
       },
       "role": "Species matching and trait data for the fourth-corner GLLVM.",
       "schema": {
@@ -230,17 +228,23 @@
       "required": true,
       "frozen_for_reproduction": true,
       "generated_by_pipeline": false,
-      "sha256": null,
-      "sidecar_sha256": null,
+      "sha256": "8119d45d6d5c59d1a189cac3d632630a81e4a500eb3ccac97a3b5a07d18ed02f",
+      "sidecar_sha256": {
+        "inputs/data_raw/spatial_grids/study_area.dbf": "d9896a44f5937322c1e704d9b331cbae21fe764113bd99c1537dae954e16578f",
+        "inputs/data_raw/spatial_grids/study_area.prj": "bc5b0145c9d454b8e35e2cc47793a3bae2efb5b2cfc74a252e16b4cd35e63d57",
+        "inputs/data_raw/spatial_grids/study_area.shx": "8ebf6eaed87b20fe6f4235cdc0fee0d8cb340facfeb86a341259d7929617ead9"
+      },
       "source": {
-        "provider": null,
-        "dataset_version": null,
+        "provider": "Author-created boundary derived from IBRA 7.0 subregions",
+        "dataset_version": "One-feature study extent based on 162 selected IBRA7 subregions",
         "persistent_identifier": null,
         "accessed_or_created_at": null,
-        "creation_method": null,
-        "citation": null,
-        "licence": null,
-        "redistribution_permitted": null
+        "creation_method": "Derived from the 162 IBRA7 subregions in inputs/data_raw/spatial_grids/ibra_selected.shp; the precise geometry operation was not recorded.",
+        "citation": "Author-created study extent derived from Interim Biogeographic Regionalisation for Australia (IBRA) 7.0 subregions; cite the IBRA source alongside this derivative.",
+        "licence": "Author-created derivative of IBRA 7.0 data; attribution to the IBRA source is required under its CC BY 3.0 Australia terms.",
+        "redistribution_permitted": true,
+        "selection_layer": "inputs/data_raw/spatial_grids/ibra_selected.shp",
+        "selection_layer_sha256": "1af120635f655f8d7842250bea55bd26801baffb7e093f266ab54d3d8d2b13cd"
       },
       "role": "Boundary used to generate the analysis hexagons and crop and mask both raw rasters.",
       "schema": {
@@ -265,16 +269,21 @@
       "required": true,
       "frozen_for_reproduction": true,
       "generated_by_pipeline": false,
-      "sha256": null,
-      "sidecar_sha256": null,
+      "sha256": "9818b9fd0c1442eba27b8da4522cb44a1cfa778fd9642e75217e97b0e1b504d6",
+      "sidecar_sha256": {
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.dbf": "b6996051c0f07c2bd390536749bc1a9765b6d5dde72bc47ea48c5c47cd413445",
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.prj": "bc5b0145c9d454b8e35e2cc47793a3bae2efb5b2cfc74a252e16b4cd35e63d57",
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.shx": "0c7e51374c91e1d4b258faaa82dc8a71587adb6ab5ab89767d8e7823e2b57d0a",
+        "inputs/data_raw/spatial_grids/IBRA7_subregions/ibra7_subregions.shp.xml": "100a4a4e59bcd76d1a231d8351b8c90e9b9d552f4f351f6c6a3a69041b7c9bbe"
+      },
       "source": {
         "provider": "Australian Government Department of Sustainability, Environment, Water, Population and Communities",
         "dataset_version": "IBRA 7.0",
         "persistent_identifier": "ISOCW0501015457",
         "accessed_at": null,
-        "citation": null,
-        "licence": "Creative Commons Attribution stated in the supplied metadata; exact licence version requires author confirmation",
-        "redistribution_permitted": null
+        "citation": "Australian Government Department of Sustainability, Environment, Water, Population and Communities. Interim Biogeographic Regionalisation for Australia (IBRA), version 7.0, subregions. Source identifier ISOCW0501015457.",
+        "licence": "Creative Commons Attribution 3.0 Australia (CC BY 3.0 AU), as recorded in the accompanying source metadata.",
+        "redistribution_permitted": true
       },
       "role": "Subregion polygons for regional convergence, GLLVM site grouping, and the Noisy Miner residualisation sensitivity analysis.",
       "schema": {
@@ -308,8 +317,15 @@
       "frozen_for_reproduction": true,
       "generated_by_pipeline": false,
       "bytes": 300101632,
-      "sha256": null,
-      "sidecar_sha256": null,
+      "sha256": "d68796237cb11cc51589d0e2f24aef33a6e83d6eea7f8626ef032fd951f1f72c",
+      "sidecar_sha256": {
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tfw": "207082dc771b7e995ffa0a0bfa2d60b3d79c91e08ab1aae61e0c1c9d3bdb5338",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.aux.xml": "ac06f2fc6be014d205e6c6f20600a1f2c45a4cf2f4bc3eba3baf233e48b135a3",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.ovr": "9413a0f6d527d276ade302608dd21db3ef31d3c29aace61297c5f5c0a39e4098",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.vat.cpg": "3ad3031f5503a4404af825262ee8232cc04d4ea6683d42c5dd0a2f2a27ac9824",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.vat.dbf": "0a807df70a387be4d11457f4874cef213fbd11d0d7be8082aabf289d35d2c9a7",
+        "inputs/data_raw/raw_rasters/clum_50m_2023_v2.tif.xml": "3f3031a19533ffc9e112eb6d860a2392a5bb79d20bccd71d6d8de99f12657a5e"
+      },
       "source": {
         "provider": "Australian Bureau of Agricultural and Resource Economics and Sciences (ABARES)",
         "dataset_version": "Catchment Scale Land Use of Australia – Update December 2023 version 2",
@@ -375,16 +391,18 @@
       "frozen_for_reproduction": true,
       "generated_by_pipeline": false,
       "bytes": 85411268,
-      "sha256": null,
-      "sidecar_sha256": null,
+      "sha256": "a2f084c669480419e69110b28ce74da7df11222d97112092f3c5c97b90be1289",
+      "sidecar_sha256": {
+        "inputs/data_raw/raw_rasters/nvis_mvg.tif.aux.xml": "3ddcaf0c7ecf7c9a0fda946dd7ff16b9934bd1c3793f55385261b82297ca6c22"
+      },
       "source": {
-        "provider": "NVIS product publisher to be confirmed from the raster release metadata",
+        "provider": "Department of Climate Change, Energy, the Environment and Water",
         "dataset_version": "NVIS 7.0",
         "persistent_identifier": null,
         "accessed_at": null,
-        "citation": null,
-        "licence": "Author reports CC Attribution for the vegetation data; confirm exact product licence/version. The supplied MVG fact-sheet licence does not establish the raster's licence.",
-        "redistribution_permitted": null
+        "citation": "Department of Climate Change, Energy, the Environment and Water. (2023). National Vegetation Information System (NVIS) Major Vegetation Groups raster, version 7.0.",
+        "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0), confirmed by the author for this raster.",
+        "redistribution_permitted": true
       },
       "local_metadata": {
         "metadata_file": "inputs/data_raw/raw_rasters/nvis_mvg.tif.aux.xml",

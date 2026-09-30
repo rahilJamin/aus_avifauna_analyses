@@ -11,15 +11,22 @@
   ],
   "format": "ESRI Shapefile",
   "source": {
-    "provider": null,
-    "creation_method": null,
-    "citation": null,
-    "licence": null,
-    "redistribution_status": "free to share and adapt, with attribution; see the source for details."
+    "provider": "Author-created boundary derived from IBRA 7.0 subregions",
+    "creation_method": "One-feature study extent derived from the 162 selected IBRA7 subregions in inputs/data_raw/spatial_grids/ibra_selected.shp; the precise geometry operation was not recorded.",
+    "citation": "Author-created study extent derived from Interim Biogeographic Regionalisation for Australia (IBRA) 7.0 subregions; cite the IBRA source alongside this derivative.",
+    "licence": "Derivative of IBRA 7.0 data, which require attribution under CC BY 3.0 Australia.",
+    "redistribution_status": "May be shared with attribution to the IBRA 7.0 source.",
+    "selection_layer": "inputs/data_raw/spatial_grids/ibra_selected.shp",
+    "selection_layer_sha256": "1af120635f655f8d7842250bea55bd26801baffb7e093f266ab54d3d8d2b13cd",
+    "selected_subregions": 162
   },
   "schema": {
     "geometry_type": "polygon",
-    "coordinate_reference_system": "Read from the supplied .prj file; document the authoritative CRS after checking the source.",
+    "coordinate_reference_system": {
+      "epsg": 4283,
+      "name": "GDA94",
+      "evidence": "Supplied study_area.prj file"
+    },
     "dbf_fields": [
       {
         "name": "OBJECTID",
@@ -39,7 +46,5 @@
     ],
     "workflow_use": "Boundary for creating the hexagon grid and for cropping/masking the raw land-use and vegetation rasters."
   },
-  "author_confirmation_needed": [
-    "Identify the boundary source or creation method, source date, CRS/datum and reuse terms."
-  ]
+  "provenance_limit": "The exact subregion selection is preserved in ibra_selected.shp, but the original operation that combined those features into study_area.shp was not recorded."
 }

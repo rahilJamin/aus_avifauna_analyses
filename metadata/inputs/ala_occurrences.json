@@ -9,9 +9,9 @@
     "frozen_snapshot": true,
     "exact_query_id": null,
     "access_date": "2026-02-10",
-    "citation": null,
-    "licence": "Must be resolved at contributing dataset level before redistribution. ALA's general support for CC BY/CC0 does not establish the licence of every record in this export.",
-    "redistribution_status": "author review required"
+    "citation": "Atlas of Living Australia, frozen occurrence export accessed 2026-02-10; original resources are identified in the dataResourceName and datasetName fields.",
+    "licence": "Contributing-dataset licences vary and were not retained in this frozen CSV; the author confirms redistribution with appropriate attribution.",
+    "redistribution_status": "Author confirms that this frozen export may be shared with attribution to the Atlas of Living Australia and the contributing data resources."
   },
   "acquisition_reference": {
     "script": "scripts/data_acquisition/ala_query_reference.R",
@@ -184,7 +184,7 @@
   },
   "processing_notes": [
     "The frozen export, not a new query, is the reproducibility input.",
-    "Record-level source licences must be checked before placing the export or a subset in a public data release.",
+    "The author confirms redistribution of this frozen export with attribution. Preserve the dataResourceName and datasetName columns, which identify the contributing resources in each record.",
     "The configured 2500 m coordinate-uncertainty rule is an analysis filter, not a property of the source dataset."
   ]
 }

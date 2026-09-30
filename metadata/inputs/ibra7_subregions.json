@@ -14,6 +14,7 @@
   "source": {
     "provider": "Australian Government Department of Sustainability, Environment, Water, Population and Communities",
     "version": "IBRA 7.0",
+    "citation": "Australian Government Department of Sustainability, Environment, Water, Population and Communities. Interim Biogeographic Regionalisation for Australia (IBRA), version 7.0, subregions. Source identifier ISOCW0501015457.",
     "persistent_identifier": "ISOCW0501015457",
     "licence": "CC BY 3.0 https://creativecommons.org/licenses/by/3.0/au/",
     "redistribution_status": "free to share and adapt, with attribution; see https://fed.dcceew.gov.au/datasets/8f7e2436a6d5436ca001fa7f2aee3fd8/about for details."
@@ -112,7 +113,5 @@
       }
     ]
   },
-  "author_confirmation_needed": [
-    "Complete the official citation and exact licence version from the source release."
-  ]
+  "provenance_note": "The supplied shapefile XML names the publisher, identifies the release as IBRA 7.0, and gives source identifier ISOCW0501015457."
 }

@@ -6,10 +6,10 @@
   "format": "CSV",
   "source": {
     "provider": "AVONET: morphological, ecological and geographical data for all birds",
-    "release_or_version": null,
-    "citation": "Tobias et al 2022 Ecology Letters doi: https://doi.org/10.111/ele.13898",
-    "licence": "CC BY 4.0 https://creativecommons.org/licenses/by/4.0/",
-    "redistribution_status": "Free to share and adapt, with attribution; see https://avonet.github.io/ for details."
+    "release_or_version": "Trait data associated with Tobias et al. (2022); exact source-file release was not recorded.",
+    "citation": "Tobias et al. (2022). AVONET: morphological, ecological and geographical data for all birds. Ecology Letters 25:581–597.",
+    "licence": "Creative Commons Attribution 4.0 International (CC BY 4.0), confirmed by the author.",
+    "redistribution_status": "May be shared and adapted with attribution to AVONET."
   },
   "schema": {
     "record_unit": "One taxon or species row as represented in the supplied trait table",
@@ -216,9 +216,5 @@
       "The fitted model uses log(mass), then centres and scales it; hand_wing_index is centred and scaled."
     ]
   },
-  "author_confirmation_needed": [
-    "Add the exact AVONET release citation and identifier.",
-    "Confirm units and source coding for fields marked source-defined.",
-    "Describe how this supplied subset was filtered or modified from the cited release."
-  ]
+  "provenance_limit": "This frozen table contains 188 species. The exact AVONET source-file release and any edits beyond selecting the study species were not recorded. Unused columns marked source-defined retain their AVONET source coding."
 }
